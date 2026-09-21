@@ -1,0 +1,4 @@
+tmp/*
+/gsvalidator
+/coverage.out
+/coverage.html

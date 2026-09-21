@@ -1,0 +1,72 @@
+{
+  "rules": [
+    {
+      "rule_id": "name_presence",
+      "rule_name": "Scientific Name Presence",
+      "description": "Scientific name must be present",
+      "table_name": "name",
+      "field_name": "scientificName",
+      "validator_type": "presence",
+      "validation_type": "hard",
+      "parameters": {},
+      "error_message": "Scientific name is required",
+      "is_active": true,
+      "priority": 1
+    },
+    {
+      "rule_id": "name_length",
+      "rule_name": "Scientific Name Length",
+      "description": "Scientific name must be between 3 and 100 characters",
+      "table_name": "name",
+      "field_name": "scientificName",
+      "validator_type": "length",
+      "validation_type": "soft",
+      "parameters": {
+        "min": 3,
+        "max": 100
+      },
+      "error_message": "Scientific name should be between 3 and 100 characters",
+      "warning_message": "Scientific name length is outside recommended range",
+      "is_active": true,
+      "priority": 2
+    },
+    {
+      "rule_id": "iczn_family_suffix",
+      "rule_name": "ICZN Family Suffix -idae",
+      "description": "ICZN family names must end with '-idae' (Article 29.2)",
+      "table_name": "name",
+      "field_name": "scientificName",
+      "validator_type": "regex",
+      "validation_type": "hard",
+      "conditions": [
+        {
+          "field": "rank",
+          "operator": "equals",
+          "value": "family"
+        }
+      ],
+      "parameters": {
+        "pattern": "idae$"
+      },
+      "error_message": "ICZN family names must end with '-idae' (Article 29.2)",
+      "is_active": true,
+      "priority": 3
+    },
+    {
+      "rule_id": "year_range",
+      "rule_name": "Year Range Validation",
+      "description": "Year must be between 1758 and current year + 5",
+      "table_name": "name",
+      "field_name": "year",
+      "validator_type": "range",
+      "validation_type": "hard",
+      "parameters": {
+        "min": 1758,
+        "max": "current_year"
+      },
+      "error_message": "Year must be between 1758 and current year",
+      "is_active": true,
+      "priority": 4
+    }
+  ]
+}
